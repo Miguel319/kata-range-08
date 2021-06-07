@@ -6,8 +6,6 @@ describe("Range class", () => {
     .spyOn(range, "getAllPoints")
     .mockImplementation(() => "Hello");
 
-  // const
-
   it("[2,6) allPoints = {2,3,4,5}", () => {
     const expectedVals = [2, 3, 4, 5];
 
@@ -16,6 +14,14 @@ describe("Range class", () => {
 
   it("[2,5) doesn’t contain [7,10)", () => {
     expect(range.containsRange("[2,5]", "[7,10)")).toBe(false);
+  });
+
+  it("[2,5) doesn’t contain [3,10)", () => {
+    expect(range.containsRange("[2,5]", "[3,10)")).toBe(false);
+  });
+
+  it("[3,5) doesn’t contain [2,10)", () => {
+    expect(range.containsRange("[2,5]", "[2,10)")).toBe(false);
   });
 
   spy.mockRestore();
