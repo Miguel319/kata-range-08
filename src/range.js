@@ -47,6 +47,15 @@ class Range {
 
     return [from, to];
   }
+
+  overlapsRange(rangeVals, overlap) {
+    const initialRange = this.getAllPoints(overlap);
+    const finalRange = this.getAllPoints(rangeVals);
+
+    const overlaps = [...initialRange].some((v) => finalRange.includes(v));
+
+    return overlaps;
+  }
 }
 
 module.exports = Range;
