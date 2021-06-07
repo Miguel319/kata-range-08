@@ -41,6 +41,12 @@ class Range {
 
     return finalFrom >= initialFrom && finalTo <= initialTo;
   }
+
+  endPoints(rangeVals) {
+    const { from, to } = this.getFromAndTo(rangeVals);
+
+    return [from, to];
+  }
 }
 
 module.exports = Range;

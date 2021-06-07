@@ -24,5 +24,29 @@ describe("Range class", () => {
     expect(range.containsRange("[2,5]", "[2,10)")).toBe(false);
   });
 
+  it("[2,6) endPoints = {2,5}", () => {
+    const expectedVals = [2, 5];
+
+    expect(range.endPoints("[2,6)")).toStrictEqual(expectedVals);
+  });
+
+  it("[2,6] endPoints = {2,6}", () => {
+    const expectedVals = [2, 6];
+
+    expect(range.endPoints("[2,6]")).toStrictEqual(expectedVals);
+  });
+  
+  it("(2,6) endPoints = {3,5}", () => {
+    const expectedVals = [3, 5];
+
+    expect(range.endPoints("(2,6)")).toStrictEqual(expectedVals);
+  });
+
+  it("(2,6] endPoints = {3,6}", () => {
+    const expectedVals = [3, 6];
+
+    expect(range.endPoints("(2,6]")).toStrictEqual(expectedVals);
+  });
+
   spy.mockRestore();
 });
