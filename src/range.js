@@ -1,20 +1,21 @@
 class Range {
   getFromAndTo(rangeVals) {
-    const firstChar = rangeVals[0];
-    const lastChart = rangeVals[rangeVals.length - 1];
+    const [firstChar, lastChar] = rangeVals.split(",");
 
     const from =
-      firstChar === "["
-        ? Number(rangeVals[1])
-        : firstChar === "("
-        ? Number(rangeVals[rangeVals[1]]) + 1
+      firstChar[0] === "["
+        ? Number(firstChar.slice(1))
+        : firstChar[0] === "("
+        ? Number(firstChar.slice(1)) + 1
         : null;
 
+    const lastCharSymbol = lastChar[lastChar.length - 1];
+
     const to =
-      lastChart === "]"
-        ? Number(rangeVals[rangeVals.length - 2])
-        : lastChart === ")"
-        ? Number(rangeVals[rangeVals.length - 2]) - 1
+      lastCharSymbol === "]"
+        ? Number(lastChar.slice(0, lastChar.length - 1))
+        : lastCharSymbol === ")"
+        ? Number(lastChar.slice(0, lastChar.length - 1)) - 1
         : null;
 
     return { from, to };
@@ -30,6 +31,15 @@ class Range {
     }
 
     return points;
+  }
+
+  containsRange(rangeVals, containedIn) {
+    const { from: initialFrom, to: initialTo } = this.getFromAndTo(rangeVals);
+    const { from: finalFrom, to: finalTo } = this.getFromAndTo(containedIn);
+
+    console.log(finalFrom, finalTo);
+
+    return finalFrom >= initialFrom && finalTo <= initialTo;
   }
 }
 

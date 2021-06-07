@@ -6,13 +6,17 @@ describe("Range class", () => {
     .spyOn(range, "getAllPoints")
     .mockImplementation(() => "Hello");
 
-  it("Should return [2, 3, 4, 5]", () => {
+  // const
+
+  it("[2,6) allPoints = {2,3,4,5}", () => {
     const expectedVals = [2, 3, 4, 5];
 
     expect(range.getAllPoints("[2, 6)")).toStrictEqual(expectedVals);
   });
 
-
+  it("[2,5) doesn’t contain [7,10)", () => {
+    expect(range.containsRange("[2,5]", "[7,10)")).toBe(false);
+  });
 
   spy.mockRestore();
 });
