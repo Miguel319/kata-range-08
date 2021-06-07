@@ -56,6 +56,14 @@ class Range {
 
     return overlaps;
   }
+
+  equals(initialRange, finalRange) {
+    const { from: initialFrom, to: initialTo } =
+      this.getFromAndTo(initialRange);
+    const { from: finalFrom, to: finalTo } = this.getFromAndTo(finalRange);
+
+    return initialFrom === finalFrom && initialTo === finalTo;
+  }
 }
 
 module.exports = Range;

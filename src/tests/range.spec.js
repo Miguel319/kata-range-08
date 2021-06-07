@@ -72,5 +72,23 @@ describe("Range class", () => {
     });
   });
 
+  describe("Equals", () => {
+    it("[3,5) equals [3,5)", () => {
+      expect(range.equals("[3,5)", "[3,5)")).toBe(true);
+    });
+
+    it("[2,10) neq [3,5)", () => {
+      expect(range.equals("[2,10)", "[3,5)")).toBe(false);
+    });
+
+    it("[2,5) neq [3,10)", () => {
+      expect(range.equals("[2,5)", "[3,10)")).toBe(false);
+    });
+
+    it(" [3,5) neq [2,10)", () => {
+      expect(range.equals("[3,5)", "[3,10)")).toBe(false);
+    });
+  });
+
   spy.mockRestore();
 });
