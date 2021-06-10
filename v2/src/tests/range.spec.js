@@ -47,5 +47,20 @@ describe("Range", () => {
         expect(new Range("[2,5)").containsRange("[3,5)")).toBe(true);
       });
     });
+
+    describe("endPoints", () => {
+      it("[2,6) endPoints = {2,5}", () => {
+        expect(new Range("[2,6)").endPoints()).toStrictEqual([2, 5]);
+      });
+      it("[2,6] endPoints = {2,6}", () => {
+        expect(new Range("[2,6]").endPoints()).toStrictEqual([2, 6]);
+      });
+      it("(2,6) endPoints = {3,5}", () => {
+        expect(new Range("(2,6)").endPoints()).toStrictEqual([3, 5]);
+      });
+      it("(2,6] endPoints = {3,6}", () => {
+        expect(new Range("(2,6]").endPoints()).toStrictEqual([3, 6]);
+      });
+    });
   });
 });

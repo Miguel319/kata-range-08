@@ -6,7 +6,7 @@ class Range {
     const lastChar = this.rangeVals[this.rangeVals.length - 1];
 
     const validFirstChar = firstChar === "[" || firstChar === "(";
-    const validLastChar = lastChar === ")" || lastChar === ")";
+    const validLastChar = lastChar === "]" || lastChar === ")";
 
     const validInput =
       validFirstChar && validLastChar && this.rangeVals.includes(",");
@@ -22,6 +22,7 @@ class Range {
     this.integerRangeContains = this.integerRangeContains.bind(this);
     this.getAllPoints = this.getAllPoints.bind(this);
     this.containsRange = this.containsRange.bind(this);
+    this.endPoints = this.endPoints.bind(this);
 
     if (!this.isInputValid()) throw Error("Invalid input.");
   }
@@ -79,6 +80,12 @@ class Range {
     const { from: fromFinal, to: finalTo } = this.getFromAndTo(secondaryRange);
 
     return fromFinal >= fromInitial && finalTo <= initialTo;
+  }
+
+  endPoints() {
+    const { from, to } = this.getFromAndTo(this.rangeVals);
+
+    return [from, to];
   }
 }
 
