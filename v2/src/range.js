@@ -21,12 +21,13 @@ class Range {
     this.getFromAndTo = this.getFromAndTo.bind(this);
     this.integerRangeContains = this.integerRangeContains.bind(this);
     this.getAllPoints = this.getAllPoints.bind(this);
+    this.containsRange = this.containsRange.bind(this);
 
     if (!this.isInputValid()) throw Error("Invalid input.");
   }
 
-  getFromAndTo() {
-    const [firstChar, lastChar] = this.rangeVals.split(",");
+  getFromAndTo(rangeVals) {
+    const [firstChar, lastChar] = rangeVals.split(",");
 
     const from =
       firstChar[0] === "["
@@ -44,13 +45,11 @@ class Range {
         ? Number(lastChar.slice(0, lastChar.length - 1)) - 1
         : null;
 
-    console.log(from, to);
-
     return { from, to };
   }
 
   getAllPoints() {
-    const { from, to } = this.getFromAndTo();
+    const { from, to } = this.getFromAndTo(this.rangeVals);
 
     const points = [];
 
@@ -70,6 +69,16 @@ class Range {
     );
 
     return commonVals.length === containedVals.length;
+  }
+
+  containsRange(secondaryRange) {
+    const { from: fromInitial, to: initialTo } = this.getFromAndTo(
+      this.rangeVals
+    );
+
+    const { from: fromFinal, to: finalTo } = this.getFromAndTo(secondaryRange);
+
+    return fromFinal >= fromInitial && finalTo <= initialTo;
   }
 }
 
