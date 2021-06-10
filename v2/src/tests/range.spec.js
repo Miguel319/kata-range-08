@@ -80,5 +80,16 @@ describe("Range", () => {
         expect(new Range("[3,5)").overlapsRange("[2,10)")).toBe(true);
       });
     });
+
+    describe("equals", () => {
+      it("[3,5) equals [3,5)", () =>
+        expect(new Range("[3,5)").equals("[3,5)")).toBe(true));
+      it("[2,10) neq [3,5)", () =>
+        expect(new Range("[2,10)").equals("[3,5)")).toBe(false));
+      it("[2,5) neq [3,10)", () =>
+        expect(new Range("[2,5)").equals("[3,10)")).toBe(false));
+      it("[3,5) neq [2,10)", () =>
+        expect(new Range("[3,5)").equals("[2,10)")).toBe(false));
+    });
   });
 });

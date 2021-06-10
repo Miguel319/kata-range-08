@@ -24,6 +24,7 @@ class Range {
     this.containsRange = this.containsRange.bind(this);
     this.endPoints = this.endPoints.bind(this);
     this.overlapsRange = this.overlapsRange.bind(this);
+    this.equals = this.equals.bind(this);
 
     if (!this.isInputValid()) throw Error("Invalid input.");
   }
@@ -100,6 +101,16 @@ class Range {
     }
 
     return [...initialPoints].some((v) => secondaryPoints.includes(v));
+  }
+
+  equals(secondaryRange) {
+    const { from: initialFrom, to: initialTo } = this.getFromAndTo(
+      this.rangeVals
+    );
+
+    const { from: finalFrom, to: finalTo } = this.getFromAndTo(secondaryRange);
+
+    return initialFrom === finalFrom && initialTo === finalTo;
   }
 }
 
