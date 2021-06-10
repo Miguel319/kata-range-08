@@ -23,6 +23,7 @@ class Range {
     this.getAllPoints = this.getAllPoints.bind(this);
     this.containsRange = this.containsRange.bind(this);
     this.endPoints = this.endPoints.bind(this);
+    this.overlapsRange = this.overlapsRange.bind(this);
 
     if (!this.isInputValid()) throw Error("Invalid input.");
   }
@@ -86,6 +87,19 @@ class Range {
     const { from, to } = this.getFromAndTo(this.rangeVals);
 
     return [from, to];
+  }
+
+  overlapsRange(secondaryRange) {
+    const initialPoints = this.getAllPoints();
+    const { from, to } = this.getFromAndTo(secondaryRange);
+
+    const secondaryPoints = [];
+
+    for (let i = from; i <= to; i++) {
+      secondaryPoints.push(i);
+    }
+
+    return [...initialPoints].some((v) => secondaryPoints.includes(v));
   }
 }
 
