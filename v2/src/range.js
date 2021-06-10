@@ -49,8 +49,6 @@ class Range {
     return { from, to };
   }
 
-  integerRangeContains() {}
-
   getAllPoints() {
     const { from, to } = this.getFromAndTo();
 
@@ -61,6 +59,17 @@ class Range {
     }
 
     return points;
+  }
+
+  integerRangeContains(rangeVal) {
+    const initialVals = this.getAllPoints();
+    const containedVals = rangeVal.replace("{", "").replace("}", "").split(",");
+
+    const commonVals = [...containedVals].filter((v) =>
+      initialVals.includes(Number(v))
+    );
+
+    return commonVals.length === containedVals.length;
   }
 }
 
