@@ -19,6 +19,7 @@ class Range {
     this.getAllPoints = this.getAllPoints.bind(this);
     this.containsRange = this.containsRange.bind(this);
     this.integerRangeContains = this.integerRangeContains.bind(this);
+    this.endPoints = this.endPoints.bind(this);
   }
 
   getAllPoints() {
@@ -51,6 +52,12 @@ class Range {
     const commonArr = altArr.filter((v) => rangeArr.includes(Number(v)));
 
     return altArr.length === commonArr.length;
+  }
+
+  endPoints() {
+    const { from, to } = getFromAndTo(this.rangeVals);
+
+    return [from, to];
   }
 }
 
