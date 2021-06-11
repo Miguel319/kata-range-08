@@ -1,4 +1,9 @@
-const { isInputValid, getFromAndTo } = require("./utils/range.utils");
+const {
+  isInputValid,
+  getFromAndTo,
+  isContainsRangeInputValid,
+  getIntegerRangeArr,
+} = require("./utils/range.utils");
 
 class Range {
   rangeVals;
@@ -13,6 +18,7 @@ class Range {
 
     this.getAllPoints = this.getAllPoints.bind(this);
     this.containsRange = this.containsRange.bind(this);
+    this.integerRangeContains = this.integerRangeContains.bind(this);
   }
 
   getAllPoints() {
@@ -33,6 +39,18 @@ class Range {
     const { from: finalFrom, to: finalTo } = getFromAndTo(altRange);
 
     return finalFrom >= initialFrom && finalTo <= initialTo;
+  }
+
+  integerRangeContains(altRange) {
+    if (!isContainsRangeInputValid(altRange))
+      throw Error("Input should start with { and end with }.");
+
+    const rangeArr = this.getAllPoints();
+    const altArr = getIntegerRangeArr(altRange);
+
+    const commonArr = altArr.filter((v) => rangeArr.includes(Number(v)));
+
+    return altArr.length === commonArr.length;
   }
 }
 

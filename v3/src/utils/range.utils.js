@@ -21,8 +21,6 @@ const getFromAndTo = (rangeVals) => {
       ? Number(firstChar[1]) + 1
       : null;
 
-  console.log("from", from);
-
   const to =
     lastSymbol === "]"
       ? Number(lastChar.slice(0, lastChar.length - 1))
@@ -30,12 +28,25 @@ const getFromAndTo = (rangeVals) => {
       ? Number(lastChar.slice(0, lastChar.length - 1)) - 1
       : null;
 
-  console.log("to", to);
-
   return { from, to };
+};
+
+const isContainsRangeInputValid = (rangeVals) => {
+  const firstChar = rangeVals[0];
+  const lastChar = rangeVals[rangeVals.length - 1];
+
+  return firstChar === "{" && lastChar === "}";
+};
+
+const getIntegerRangeArr = (rangeVals) => {
+  const newArr = rangeVals.replace("{", "").replace("}", "").split(",");
+
+  return newArr;
 };
 
 module.exports = {
   isInputValid,
   getFromAndTo,
+  isContainsRangeInputValid,
+  getIntegerRangeArr
 };

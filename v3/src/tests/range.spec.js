@@ -32,4 +32,22 @@ describe("Range", () => {
     it("[3,5] contains [3,5)", () =>
       expect(new Range("[3,5)").containsRange("[3,5)")).toBe(true));
   });
+
+  describe("integerRangeContains", () => {
+    it("Throws error if invalid input is provided.", () => {
+      expect(() => new Range("[3,8)").integerRangeContains("2,9")).toThrow(
+        "Input should start with { and end with }."
+      );
+    });
+
+    it("[2,6) contains {2,4}", () => {
+      expect(new Range("[2,6)").integerRangeContains("{2,4}")).toBe(true);
+    });
+
+    it("[2,6) doesn’t contain {-1,1,6,10}", () => {
+      expect(new Range("[2,6)").integerRangeContains("{-1,1,6,10}")).toBe(
+        false
+      );
+    });
+  });
 });
