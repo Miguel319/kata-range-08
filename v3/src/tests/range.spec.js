@@ -13,4 +13,10 @@ describe("Range", () => {
       "Input should start with [ or (, and it should end with a ] and a )."
     );
   });
+
+  describe("getAllPoints", () => {
+    it("[2,6) allPoints = {2,3,4,5}", () => {
+      expect(new Range("[2,6)").getAllPoints()).toStrictEqual([2, 3, 4, 5]);
+    });
+  });
 });
