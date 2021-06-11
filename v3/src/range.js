@@ -21,6 +21,7 @@ class Range {
     this.integerRangeContains = this.integerRangeContains.bind(this);
     this.endPoints = this.endPoints.bind(this);
     this.overlapsRange = this.overlapsRange.bind(this);
+    this.equals = this.equals.bind(this);
   }
 
   getAllPoints() {
@@ -77,6 +78,18 @@ class Range {
     const isTherOverlap = rangeArr.some((v) => altRangeArr.includes(v));
 
     return isTherOverlap;
+  }
+
+  equals(altRange) {
+    if (!isInputValid(altRange))
+      throw Error(
+        "Input should start with [ or (, and it should end with a ] and a )."
+      );
+
+    const { from: rangeValFrom, to: rangeValTo } = getFromAndTo(this.rangeVals);
+    const { from: altFrom, to: altTo } = getFromAndTo(altRange);
+
+    return rangeValFrom === altFrom && rangeValTo === altTo;
   }
 }
 
