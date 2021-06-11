@@ -12,6 +12,7 @@ class Range {
     this.rangeVals = rangeVals;
 
     this.getAllPoints = this.getAllPoints.bind(this);
+    this.containsRange = this.containsRange.bind(this);
   }
 
   getAllPoints() {
@@ -24,6 +25,14 @@ class Range {
     }
 
     return points;
+  }
+
+  containsRange(altRange) {
+    const { from: initialFrom, to: initialTo } = getFromAndTo(this.rangeVals);
+
+    const { from: finalFrom, to: finalTo } = getFromAndTo(altRange);
+
+    return finalFrom >= initialFrom && finalTo <= initialTo;
   }
 }
 
