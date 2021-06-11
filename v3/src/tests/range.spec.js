@@ -67,4 +67,32 @@ describe("Range", () => {
       expect(new Range("(2,6]").endPoints()).toStrictEqual([3, 6]);
     });
   });
+
+  describe("overlapsRange", () => {
+    it("Throws an error if invalid input is provided", () => {
+      expect(() => new Range("[3,9)").overlapsRange("[34}")).toThrow(
+        "Input should start with [ or (, and it should end with a ] and a )."
+      );
+    });
+
+    it("[2,5) doesn’t overlap with [7,10)", () => {
+      expect(new Range("[2,5)").overlapsRange("[7,10)")).toBe(false);
+    });
+
+    it("[2,10) overlaps with [3,5)", () => {
+      expect(new Range("[2,10)").overlapsRange("[3,5)")).toBe(true);
+    });
+
+    it("[3,5) overlaps with [3,5)", () => {
+      expect(new Range("[3,5)").overlapsRange("[3,5)")).toBe(true);
+    });
+
+    it("[2,5) overlaps with [3,10)", () => {
+      expect(new Range("[3,5)").overlapsRange("[3,10)")).toBe(true);
+    });
+
+    it("[3,5) overlaps with [2,10)", () => {
+      expect(new Range("[3,5)").overlapsRange("[2,10)")).toBe(true);
+    });
+  });
 });

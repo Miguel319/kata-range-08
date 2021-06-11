@@ -20,6 +20,7 @@ class Range {
     this.containsRange = this.containsRange.bind(this);
     this.integerRangeContains = this.integerRangeContains.bind(this);
     this.endPoints = this.endPoints.bind(this);
+    this.overlapsRange = this.overlapsRange.bind(this);
   }
 
   getAllPoints() {
@@ -58,6 +59,24 @@ class Range {
     const { from, to } = getFromAndTo(this.rangeVals);
 
     return [from, to];
+  }
+
+  overlapsRange(altRange) {
+    if (!isInputValid(altRange))
+      throw Error(
+        "Input should start with [ or (, and it should end with a ] and a )."
+      );
+
+    const rangeArr = this.getAllPoints();
+    const { from, to } = getFromAndTo(altRange);
+
+    const altRangeArr = [];
+
+    for (let i = from; i <= to; i++) altRangeArr.push(i);
+
+    const isTherOverlap = rangeArr.some((v) => altRangeArr.includes(v));
+
+    return isTherOverlap;
   }
 }
 
